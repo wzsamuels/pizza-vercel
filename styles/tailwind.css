@@ -4,6 +4,32 @@
 
 @layer base {
   html {
-    font-family: 'Cormorant SC', serif;
+    @apply text-red-900;
+  }
+
+  .menu-icon {
+    display: inline-block;
+    cursor: pointer;
+  }
+
+  .bar1, .bar2, .bar3 {
+    @apply w-[30px] md:w-[35px] h-[3px] md:h-[5px];
+    background-color: #742a2a;
+    margin: 6px 0;
+    transition: 0.4s;
+  }
+
+  .change .bar1 {
+    @apply -rotate-45 translate-y-[8px] md:translate-y-[10px];
+  /*transform: rotate(-45deg) translate(-5px, 6px);*/
+    /*transform: rotate(-45deg) translate(-9px, 6px);*/
+  }
+
+  .change .bar2 {opacity: 0;}
+
+  .change .bar3 {
+    @apply rotate-45 translate-y-[-9px] md:translate-y-[-12px];
+    /*transform: rotate(45deg) translate(-6px, -8px);*/
+    /*transform: rotate(45deg) translate(-8px, -8px);*/
   }
 }
