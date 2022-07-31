@@ -22,7 +22,7 @@ export default function AboutRoute() {
     <div>
       { aboutData.map((item, index) =>
         <div key={index} className="mt-8 w-[800x] max-w-[100vw] md:max-w-[90vw]">
-          <div className="w-full shadow-2xl md:w-2/3 p-4 mx-auto mt-0 md:-mb-20 border z-10 relative bg-white md:rounded-2xl  ">
+          <div className="w-full shadow-2xl md:w-2/3 p-4 mx-auto mt-0 md:-mb-20 border z-10 relative bg-white   ">
             <div className="text-2xl md:text-3xl p-4 text-center">{item.text}</div>
           </div>
           <div

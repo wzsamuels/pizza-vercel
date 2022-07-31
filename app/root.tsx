@@ -22,7 +22,7 @@ export const links: LinksFunction = () => {
   return [
     { rel: "stylesheet", href: tailwindStylesheetUrl },
     { rel: "preconnect", href:"https://fonts.googleapis.com"},
-    { rel: "preconnect", href:"https://fonts.gstatic.com", crossorigin: "true" },
+    { rel: "preconnect", href:"https://fonts.gstatic.com", crossOrigin: "true" },
     { rel: "stylesheet", href:"https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@400&family=Great+Vibes&https://fonts.googleapis.com/css2?family=Cabin&family=Montserrat:wght@700&display=swap"},
     { rel: "stylesheet" ,href: globalStyles}
   ];
@@ -37,23 +37,20 @@ export const meta: MetaFunction = () => ({
 export default function App() {
   return (
     <html lang="en" className="h-full">
-    <head>
-      <Meta />
-      <Links />
-    </head>
-    <body className='h-full bg-white'>
-    <div className="relative min-w-full min-h-full overflow-hidden">
-      <NavBar/>
-      <div className="pt-24 lg:pt-4  lg:pl-64 pb-16 w-full">
-        <Outlet />
-      </div>
-      <Footer/>
-    </div>
-    <ScrollRestoration />
-    <Scripts />
-    <LiveReload />
-
-    </body>
+      <head>
+        <Meta />
+        <Links />
+      </head>
+      <body className='h-screen m-0 flex flex-col'>
+        <NavBar />
+        <div className="pt-[60px] lg:pt-0 lg:pl-60">
+          <Outlet />
+        </div>
+        <Footer/>
+        <ScrollRestoration />
+        <Scripts />
+        <LiveReload />
+      </body>
     </html>
   );
 }

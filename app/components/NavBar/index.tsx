@@ -29,9 +29,12 @@ export default function NavBar() {
   return (
     <>
       <nav
-        className="z-40 px-2 lg:px-8 bg-white text-red-900 fixed top-0 left-0 flex flex-row lg:flex-col items-center justify-between lg:justify-start h-20 lg:h-full w-full lg:w-60 overflow-y-auto font-['Cormorant_SC']"
+        className="z-40 p-2 lg:px-8 bg-white text-red-900 fixed top-0 left-0 flex flex-row lg:flex-col items-center justify-between lg:justify-start min-h-24 lg:h-full w-full lg:w-60 overflow-y-auto overflow-x-hidden font-['Cormorant_SC']"
       >
-        <h1 className="text-red-900 text-3xl md:text-4xl lg:text-5xl mx-8 lg:mx-0 lg:text-6xl font-['Great_Vibes','cursive'] lg:mt-36 lg:mb-16"><Link to="/">The Golden Nugget</Link></h1>
+        <div>
+        <h1 className="text-red-900 text-3xl md:text-4xl lg:text-5xl mx-8 lg:mx-0 lg:text-6xl font-['Great_Vibes','cursive'] lg:mt-16 lg:mb-16"><Link to="/">The Golden Nugget</Link></h1>
+          <p className={`block text-lg text-center mt-1 lg:hidden`}>(555) 820-1245</p>
+        </div>
         <div
           className={`lg:hidden menu-icon ${navOpen && !navClosing ? 'change' : ''}`}
           onClick={() => toggleDrawer()}
@@ -47,7 +50,10 @@ export default function NavBar() {
           <p className={menuItemClass}><Link to="/contact">Contact</Link></p>
           <p className={`${menuItemClass} lg:mb-16`}><Link to="/about">About</Link></p>
           <hr className="mx-auto border border-b-red-900 w-5/6 lg:mb-16"/>
-          <p className={contactClass}>Death Valley National Park, Death Valley, California</p>
+          <div className={contactClass}>
+            <p>Death Valley National Park, Death Valley, California</p>
+            <p className="mt-4">(555) 820-1245</p>
+          </div>
         </div>
       </nav>
       <div

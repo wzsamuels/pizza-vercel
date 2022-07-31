@@ -45,12 +45,12 @@ const menuItems = [
 
 export default function MenuRoute () {
   return (
-    <div className="flex flex-col items-center justify-center text-3xl">
+    <div className="flex flex-col items-center justify-center text-3xl px-4">
       { menuItems.map(category =>
         <div className="mb-8 w-full max-w-[500px]">
           <h2 className="text-4xl text-center font-bold">{category.category}</h2>
           { category.items.map(item =>
-            <div className="ml-8 ">
+            <div>
               <h3 className="text-lg flex my-4 justify-between font-['Montserrat']">
                 <span>{item.name}</span>
                 <span>${item.price}</span>
