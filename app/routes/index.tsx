@@ -34,7 +34,7 @@ export default function IndexRoute() {
       </div>
 
       <div className="py-8 flex flex-col items-center">
-        <h2 className="text-2xl my-2 py-2 text-center">Subscribe to our newsletter stay up to date with on new menu</h2>
+        <h2 className="text-2xl my-2 py-2 text-center">Subscribe to our newsletter stay up to date on new menu items, community events, and special deals!</h2>
         {state !== "success" ?
           <Form method="post" className="my-2" replace>
             <label className="flex my-2 justify-center w-full">
