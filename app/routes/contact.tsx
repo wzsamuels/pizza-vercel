@@ -13,20 +13,20 @@ export const links: LinksFunction = () => {
 }
 
 function validateContactName(name: string) {
-  if (name.length < 2) {
-    return `That name is too short`;
+  if (name.length < 1) {
+    return `Please provide a message`;
   }
 }
 
 function validateContactMessage(message: string) {
-  if (message.length < 2) {
-    return `That message is too short`;
+  if (message.length < 1) {
+    return `Please provide a message`;
   }
 }
 
 function validateContactEmail(email: string) {
-  if (email.length < 10) {
-    return `That email is too short`;
+  if (email.length < 1) {
+    return `Please provide an email address`;
   }
 }
 
@@ -95,8 +95,9 @@ export const action: ActionFunction = async ({ request }) => {
     body: JSON.stringify(values)
   })
 
-  console.log(response)
-  return response.json();
+  console.log(`Status: ${response.status}`)
+  //Object.getOwnPropertySymbols(response).forEach((symbol, index, array) => console.log(array[symbol]))
+  return json(response.status);
 };
 
 
@@ -105,7 +106,7 @@ export default function ContactRoute() {
   const transition = useTransition();
   const state: "idle" | "success" | "error" | "submitting" = transition.submission
     ? "submitting"
-    : actionData
+    : actionData === 200
       ? "success"
       : actionData?.error
         ? "error"
@@ -113,13 +114,14 @@ export default function ContactRoute() {
 
   console.log(state)
   console.log(actionData)
+  console.log(actionData?.status)
 
   return (
     <div className="flex m-0 items-center justify-center w-full h-[calc(100vh-100px)]">
 
       <div
-        className="w-full m-0 h-full bg-no-repeat bg-cover bg-center  flex justify-center py-8"
-        style={{backgroundImage: `url(${contact1})`, margin: 0}}>
+        className="w-full m-0 h-full bg-no-repeat items-center bg-cover bg-center  flex justify-center py-8"
+        style={{backgroundImage: `url(${contact1})`, margin: 0, alignItems: "center"}}>
         <div className="font-['Cabin']  lg:mt-0  w-[700px] max-w-[95%] h-fit  max-h-[600px] p-5 items-center text-lg bg-white contact-form">
 
           <Form
@@ -142,7 +144,6 @@ export default function ContactRoute() {
                     className="border block w-[calc(100%-20px)] w-full rounded border border-gray-500 px-2 py-1 text-lg"
                     name={input.key}
                     placeholder={input.placeholder}
-
                   />
                 ) : (
                   <input
@@ -151,10 +152,11 @@ export default function ContactRoute() {
                     type={input.type}
                     placeholder={input.placeholder}
                     defaultValue={actionData?.fields?.[input.key as keyof typeof actionData.fields]}
+
                   />
                 )}
                 {actionData?.fieldErrors?.[input.key as keyof typeof actionData.fields] ? (
-                  <p className="text-purple-500 font-bold" role="alert" id="name-error">
+                  <p className="text-red-500 font-bold" role="alert" id="name-error">
                     {actionData.fieldErrors?.[input.key as keyof typeof actionData.fields]}
                   </p>
                 ) : null}

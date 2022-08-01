@@ -1,6 +1,21 @@
-import {Form} from "@remix-run/react";
+import {Form, useActionData, useTransition} from "@remix-run/react";
+import type {ActionFunction} from "@remix-run/node";
+
+export const action: ActionFunction = async ({request}) => {
+  await new Promise(resolve => setTimeout(resolve, 1000));
+  return 200
+}
 
 export default function IndexRoute() {
+  const actionData = useActionData();
+  const transition = useTransition();
+  const state: "idle" | "success" | "error" | "submitting" = transition.submission
+    ? "submitting"
+    : actionData === 200
+      ? "success"
+      : actionData?.error
+        ? "error"
+        : "idle";
 
   return (
     <main className="flex flex-col items-stretch min-h-full h-full">
@@ -15,14 +30,26 @@ export default function IndexRoute() {
         </div>
       </div>
 
-      <div className="py-8">
+      <div className="py-8 flex flex-col items-center">
         <h2 className="text-2xl my-2 py-2 text-center">Subscribe to our newsletter stay up to date with on new menu</h2>
-        <Form method="post" className="my-2" replace>
-          <label className="flex my-2 justify-center w-full">
-            <input className="border p-2 mx-2" type="text"/>
-            <button className="border border-gray-500 rounded-2xl px-4 py-2 mx-4 hover:shadow-2xl" type="submit">Subscribe</button>
-          </label>
-        </Form>
+        {state !== "success" ?
+          <Form method="post" className="my-2" replace>
+            <label className="flex my-2 justify-center w-full">
+              <input className="border p-2 mx-2" type="text"/>
+              <button
+                className="border border-gray-500 rounded-2xl px-4 py-2 mx-4 hover:shadow-2xl"
+                type="submit"
+              >
+                {state === 'submitting'
+                  ? <span>Subscribing</span>
+                  : <span>Subscribe</span>
+                }
+              </button>
+            </label>
+          </Form>
+          :
+          <span className="text-center font-bold text-2xl">Subscribed!</span>
+        }
       </div>
     </main>
   );
